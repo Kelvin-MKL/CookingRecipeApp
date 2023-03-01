@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RecipeAPI.Models;
-using Microsoft.AspNetCore.Mvc;
-[assembly: ApiController]
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 var connectionString = builder.Configuration.GetConnectionString("DevConnection"); // Newly added, in appsetting file, this is dependency injection for dbcontext class
 builder.Services.AddDbContext<DishesDBContext>(options => options.UseSqlServer(connectionString)); // Newly added
+builder.Services.AddControllers();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -44,7 +45,6 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
-
 
 
 app.Run();
