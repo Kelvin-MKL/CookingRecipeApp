@@ -78,6 +78,7 @@ namespace RecipeAPI.Controllers
         public async Task<ActionResult<Dish>> PostDish(Dish dish)
         {
             _context.Dishes.Add(dish);
+            
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDish", new { id = dish.id }, dish);

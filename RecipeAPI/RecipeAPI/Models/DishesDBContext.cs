@@ -10,5 +10,6 @@ namespace RecipeAPI.Models
         }
 
         public DbSet<Dish> Dishes { get; set; }
+        public DbSet<CookingMethod> CookingMethods { get; set; }
     }
 }

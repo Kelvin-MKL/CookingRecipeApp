@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeAPI.Models;
 
@@ -10,9 +11,10 @@ using RecipeAPI.Models;
 namespace RecipeAPI.Migrations
 {
     [DbContext(typeof(DishesDBContext))]
-    partial class DishesDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230302043340_Second create")]
+    partial class Secondcreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

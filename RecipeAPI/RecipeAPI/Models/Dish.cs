@@ -23,6 +23,10 @@ namespace RecipeAPI.Models
 
         public int efficiency { get; set; }
 
+        [ForeignKey("CookingMethod")]
+        public int cookingMethodId { get; set; }
+        public CookingMethod CookingMethod { get; set;}
+
         
     }
 }
