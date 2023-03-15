@@ -1,0 +1,59 @@
+VS 2019
+
+*If the project doesn't built -> https://learn.microsoft.com/en-us/answers/questions/1163896/visual-studio-2022-doesnt-contain-project-doesnt-b
+*Dependency injection - no start up file -> https://stackoverflow.com/questions/70952271/startup-cs-class-is-missing-in-net-6
+
+Step 1
+Visual studio -> new project -> ASP.net Core Web API
+
+Step2
+Inside models folder, create a class named eg. RecipeDBContext (detail info about the db is configured in this class
+My SQL / SQL Server). 
+Also, entity framework is used in this case, right click project, manage NuGet packages, 
+add Microsoft.EntityFrameworkCore. used v6.0.14
+
+then Microsoft.EntityFrameworkCore.SqlSever install the same version as previous (v6.0.14)
+
+then Microsoft.EntityFrameworkCore.Tools (v6.0.14)
+
+Step3
+Create table file, in that file, create all columns. (eg. Dishes)
+then back to RecipeDBContext file, 
+    public class DishesDBContext: DbContext
+    {
+        public DishesDBContext(DbContextOptions<DishesDBContext> options) : base(options) 
+        {
+        
+        }
+
+        public DbSet<Dish> Dishes { get; set; }
+    }
+}
+
+
+Step4
+go to appsetting, add ConnectionStrings
+
+Step5
+go to program.cs
+make dependency injection for dbcontext class.
+var connectionString = builder.Configuration.GetConnectionString("DevConnection"); //  in appsetting file, this is dependency injection for dbcontext class
+builder.Services.AddDbContext<DishesDBContext>(options => options.UseSqlServer(connectionString)); // Newly added
+
+Step6
+try build it first.
+go to top, Tools -> NuGet Package Manager -> Package Manager Console
+-> Add-Migration "InitialCreate"
+-> Update-Database
+
+Step7
+after completion of Step 6, click controller, add, API Controller with actions, using Entity Framework.
+Model class: Dish (RecipeAPI.Models)
+DbContext class: DishesDBContext 
+Controller name: DishController
+
+Step8
+go program.cs, 
+add 
+builder.Services.AddControllers();
+app.MapControllers();
