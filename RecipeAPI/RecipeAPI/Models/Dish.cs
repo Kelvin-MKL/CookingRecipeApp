@@ -5,13 +5,12 @@ namespace RecipeAPI.Models
 {
     public class Dish
     {
-        [Key]
+        
         public int id { get; set; }
 
-        [Column(TypeName = "nvarchar(100)")]
         public string dishName { get; set; }
 
-        [Column(TypeName = "nvarchar(20)")]
+
         public string category { get; set;}
 
         
@@ -23,9 +22,9 @@ namespace RecipeAPI.Models
 
         public int efficiency { get; set; }
 
-        [ForeignKey("CookingMethod")]
+        public CookingMethod CookingMethod { get; set; }
         public int cookingMethodId { get; set; }
-        public CookingMethod CookingMethod { get; set;}
+        
 
         
     }

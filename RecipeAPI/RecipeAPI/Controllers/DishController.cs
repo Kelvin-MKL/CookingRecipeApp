@@ -32,6 +32,7 @@ namespace RecipeAPI.Controllers
         public async Task<ActionResult<Dish>> GetDish(int id)
         {
             var dish = await _context.Dishes.FindAsync(id);
+            
 
             if (dish == null)
             {
@@ -77,6 +78,8 @@ namespace RecipeAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Dish>> PostDish(Dish dish)
         {
+
+
             _context.Dishes.Add(dish);
             
             await _context.SaveChangesAsync();

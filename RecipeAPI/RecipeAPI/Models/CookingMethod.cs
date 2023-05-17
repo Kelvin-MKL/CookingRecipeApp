@@ -6,12 +6,13 @@ namespace RecipeAPI.Models
 {
     public class CookingMethod
     {
-        [Key]
+    
         public int id { get; set; }
+        
+        public string name { get; set; } = string.Empty;
 
-        [Column(TypeName = "nvarchar(100)")]
-        public string name { get; set; }
+        public List<Dish> Dishes { get; set; }
 
-        public ICollection<Dish> Dishes { get; set; }
+        
     }
 }
