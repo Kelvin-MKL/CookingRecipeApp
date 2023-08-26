@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RecipeAPI.Models;
 
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,6 +14,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://127.0.0.1:5173");
+                      });
+});
 
 var app = builder.Build();
 
@@ -46,7 +55,7 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-
+app.UseCors(MyAllowSpecificOrigins);
 app.Run();
 
 internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
